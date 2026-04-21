@@ -1,0 +1,14 @@
+- hosts: localhost
+  become: yes
+
+  tasks:
+
+    - name: Pull Docker Image
+      command: docker pull pratham05/my-app
+
+    - name: Remove old container
+      command: docker rm -f my-container
+      ignore_errors: yes
+
+    - name: Run new container
+      command: docker run -d -p 80:80 --name my-container pratham05/my-app

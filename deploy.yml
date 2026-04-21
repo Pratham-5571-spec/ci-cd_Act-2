@@ -6,8 +6,12 @@
     - name: Pull Docker Image
       command: docker pull pratham05/my-app
 
-    - name: Remove old container
-      command: docker rm -f my-container
+    - name: Stop all running containers
+      command: docker stop $(docker ps -q)
+      ignore_errors: yes
+
+    - name: Remove all containers
+      command: docker rm -f $(docker ps -aq)
       ignore_errors: yes
 
     - name: Run new container
